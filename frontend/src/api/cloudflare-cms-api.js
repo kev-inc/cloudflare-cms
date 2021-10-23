@@ -5,9 +5,7 @@ const BASE_URL = "http://localhost:8787";
 
 export const getNamespaces = async (apiKey, id) => {
   const resp = await axios.get(BASE_URL + `/namespaces/${id}`, {
-    // params: {
-    //   apiKey: `Bearer ${apiKey}`,
-    // },
+
     headers: {
       Authorization: `Bearer ${apiKey}`,
     },
@@ -55,3 +53,12 @@ export const deleteNamespaces = async (apiKey, accId, nsId) => {
   });
   return resp.data;
 };
+
+export const getKeys = async (apiKey, accId, nsId) => {
+  const resp = await axios.get(BASE_URL + `/namespaces/${accId}/${nsId}/keys`, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+  return resp.data;
+}
