@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Swagger docs for Cloudflare CMS Serverless API (Powered by Cloudflare Workers, KV & Pages)",
+    "description": "Cloudflare CMS is a content management system that utilises Cloudflare Products (Workers, KV, and Pages) to provide a familiar environment to use Cloudflare Products. This Swagger UI page allows you to access your Cloudflare KV and use it like any other database. 'Values' are like tables, 'Keys' are like databases with a collection of tables, and 'Namespaces' are like a collection of databases. This Swagger page can be used to access Cloudflare KV belonging to any person, as long as you have the API token with KV permissions.\n\nImportant Notes:\n* Authorize with your API token (Enter `Bearer <YOUR_API_KEY>` in the Authorize prompt)\n* `accountId` can be found on the right side of your account's workers overview page \n* `namespaceId` can be found in your account's worker KV page\n* `keyName` is the name of the key in your namespace\n* `itemId` is the ID of an object in the array of values of the key\n",
     "version": "1.0.0",
     "title": "Cloudflare CMS API"
   },
