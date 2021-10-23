@@ -17,35 +17,22 @@ import {
 
 const router = Router()
 
-/*
-Our index route, a simple hello world.
-*/
-router.get('/', () => {
-    return new Response(
-        'Hello, world! This is the root page of your Worker template.'
-    )
-})
-
-// Namespaces
 router.options('*', corsHelper)
 
-router.get('/namespaces/:accountId', getNamespaces)
-router.post('/namespaces/:accountId', postNamespaces)
-router.put('/namespaces/:accountId/:namespaceId', putNamespaces)
-router.delete('/namespaces/:accountId/:namespaceId', deleteNamespaces)
+router.get('/:accountId', getNamespaces)
+router.post('/:accountId', postNamespaces)
+router.put('/:accountId/:namespaceId', putNamespaces)
+router.delete('/:accountId/:namespaceId', deleteNamespaces)
 
-router.get('/namespaces/:accountId/:namespaceId/keys', getKeys)
-router.post('/namespaces/:accountId/:namespaceId/keys', postNewKey)
+router.get('/:accountId/:namespaceId/keys', getKeys)
+router.post('/:accountId/:namespaceId/keys', postNewKey)
 
-router.get('/namespaces/:accountId/:namespaceId/:keyName', getValues)
-router.post('/namespaces/:accountId/:namespaceId/:keyName', postNewValue)
+router.get('/:accountId/:namespaceId/:keyName', getValues)
+router.post('/:accountId/:namespaceId/:keyName', postNewValue)
 
-router.get('/namespaces/:accountId/:namespaceId/:keyName/:itemId', getValue)
-router.put('/namespaces/:accountId/:namespaceId/:keyName/:itemId', putValue)
-router.delete(
-    '/namespaces/:accountId/:namespaceId/:keyName/:itemId',
-    deleteValue
-)
+router.get('/:accountId/:namespaceId/:keyName/:itemId', getValue)
+router.put('/:accountId/:namespaceId/:keyName/:itemId', putValue)
+router.delete('/:accountId/:namespaceId/:keyName/:itemId', deleteValue)
 
 router.all('*', () => new Response('404, not found!', { status: 404 }))
 
