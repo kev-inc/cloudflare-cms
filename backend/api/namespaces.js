@@ -42,7 +42,7 @@ export const postNamespaces = async request => {
 }
 */
 export const putNamespaces = async request => {
-  const accountId = request.params.accountId
+    const accountId = request.params.accountId
     const namespaceId = request.params.namespaceId
     const apiKey = request.headers.get('Authorization')
     const data = await request.json()
@@ -62,7 +62,7 @@ export const putNamespaces = async request => {
 }
 
 export const deleteNamespaces = async request => {
-  const accountId = request.params.accountId
+    const accountId = request.params.accountId
     const namespaceId = request.params.namespaceId
     const apiKey = request.headers.get('Authorization')
     const resp = await fetch(

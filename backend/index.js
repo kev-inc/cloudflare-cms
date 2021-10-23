@@ -6,9 +6,14 @@ import {
     putNamespaces,
     deleteNamespaces,
 } from './api/namespaces'
-import { getKeys } from './api/keys'
-
-const BASE_URL = 'https://api.cloudflare.com/client/v4/accounts/'
+import { getKeys, postNewKey } from './api/keys'
+import {
+    getValues,
+    postNewValue,
+    getValue,
+    putValue,
+    deleteValue,
+} from './api/values'
 
 const router = Router()
 
@@ -24,12 +29,23 @@ router.get('/', () => {
 // Namespaces
 router.options('*', corsHelper)
 
-router
-    .get('/namespaces/:accountId', getNamespaces)
-    .post('/namespaces/:accountId', postNamespaces)
-    .put('/namespaces/:accountId/:namespaceId', putNamespaces)
-    .delete('/namespaces/:accountId/:namespaceId', deleteNamespaces)
-    .get('/namespaces/:accountId/:namespaceId/keys', getKeys)
+router.get('/namespaces/:accountId', getNamespaces)
+router.post('/namespaces/:accountId', postNamespaces)
+router.put('/namespaces/:accountId/:namespaceId', putNamespaces)
+router.delete('/namespaces/:accountId/:namespaceId', deleteNamespaces)
+
+router.get('/namespaces/:accountId/:namespaceId/keys', getKeys)
+router.post('/namespaces/:accountId/:namespaceId/keys', postNewKey)
+
+router.get('/namespaces/:accountId/:namespaceId/:keyName', getValues)
+router.post('/namespaces/:accountId/:namespaceId/:keyName', postNewValue)
+
+router.get('/namespaces/:accountId/:namespaceId/:keyName/:itemId', getValue)
+router.put('/namespaces/:accountId/:namespaceId/:keyName/:itemId', putValue)
+router.delete(
+    '/namespaces/:accountId/:namespaceId/:keyName/:itemId',
+    deleteValue
+)
 
 router.all('*', () => new Response('404, not found!', { status: 404 }))
 
