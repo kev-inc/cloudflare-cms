@@ -1,18 +1,21 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Swagger docs for Cloudflare CMS Serverless API (Powered by Cloudflare Workers and KV)",
+    "description": "Swagger docs for Cloudflare CMS Serverless API (Powered by Cloudflare Workers, KV & Pages)",
     "version": "1.0.0",
     "title": "Cloudflare CMS API"
   },
   "host": "cloudflare-cms-api.kevc.workers.dev",
-  "basePath": "/namespaces",
+  "basePath": "/",
   "tags": [
     {
       "name": "namespaces"
     },
     {
-      "name": "tables"
+      "name": "keys"
+    },
+    {
+      "name": "values"
     }
   ],
   "schemes": [
@@ -73,7 +76,7 @@
           {
             "in": "body",
             "name": "payload",
-            "description": "New Namespace Details",
+            "description": "New namespace details",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Namespace"
@@ -122,7 +125,7 @@
           {
             "in": "body",
             "name": "payload",
-            "description": "Namespace Update Details",
+            "description": "Namespace update details",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Namespace"
@@ -178,13 +181,369 @@
           }
         ]
       }
+    },
+    "/{accountId}/{namespaceId}/keys": {
+      "get": {
+        "tags": [
+          "keys"
+        ],
+        "summary": "Get all keys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "keys"
+        ],
+        "summary": "Create new key",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "New key details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/{accountId}/{namespaceId}/{keyName}": {
+      "get": {
+        "tags": [
+          "values"
+        ],
+        "summary": "Get all values in key",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Name of key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "values"
+        ],
+        "summary": "Add item to values",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Name of key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "New item details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Value"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/{accountId}/{namespaceId}/{keyName}/{itemId}": {
+      "get": {
+        "tags": [
+          "values"
+        ],
+        "summary": "Get single item in values",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Name of key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "ID of item",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "values"
+        ],
+        "summary": "Update single item in values",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Name of key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "ID of item",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "Value update details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Value"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "values"
+        ],
+        "summary": "Delete single item in values",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Name of key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "ID of item",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
     "api_key": {
       "type": "apiKey",
       "name": "Authorization",
-      "in": "header"
+      "in": "header",
+      "description": "Bearer token (Cloudflare Token with KV permissions)"
     }
   },
   "definitions": {
@@ -197,6 +556,23 @@
       },
       "xml": {
         "name": "Namespace"
+      }
+    },
+    "Key": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Key"
+      }
+    },
+    "Value": {
+      "type": "object",
+      "xml": {
+        "name": "Value"
       }
     }
   }
