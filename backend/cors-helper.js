@@ -1,4 +1,4 @@
-export const corsHelper = () => {
+export const corsHelper = request => {
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
