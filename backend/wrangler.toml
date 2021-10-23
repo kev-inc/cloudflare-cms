@@ -1,0 +1,8 @@
+name = "cloudflare-cms-api"
+type = "webpack"
+
+account_id = "f4faa25babf160d8f45bfc33444f4dee"
+workers_dev = true
+route = "cloudflare-cms.pages.dev/api"
+zone_id = ""
+compatibility_date = "2021-10-23"
