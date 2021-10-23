@@ -1,0 +1,203 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger docs for Cloudflare CMS Serverless API (Powered by Cloudflare Workers and KV)",
+    "version": "1.0.0",
+    "title": "Cloudflare CMS API"
+  },
+  "host": "cloudflare-cms-api.kevc.workers.dev",
+  "basePath": "/namespaces",
+  "tags": [
+    {
+      "name": "namespaces"
+    },
+    {
+      "name": "tables"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/{accountId}": {
+      "get": {
+        "tags": [
+          "namespaces"
+        ],
+        "summary": "Get all namespaces",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "namespaces"
+        ],
+        "summary": "Create new namespace",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "New Namespace Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/{accountId}/{namespaceId}": {
+      "put": {
+        "tags": [
+          "namespaces"
+        ],
+        "summary": "Update namespace",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "Namespace Update Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "namespaces"
+        ],
+        "summary": "Delete namespaces",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "ID of account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceId",
+            "in": "path",
+            "description": "ID of namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Namespace": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Namespace"
+      }
+    }
+  }
+}

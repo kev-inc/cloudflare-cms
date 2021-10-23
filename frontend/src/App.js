@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Namespaces from "./pages/Namespaces";
 import Keys from "./pages/Keys";
+import Swagger from "./pages/Swagger";
 
 function App() {
   return (
@@ -11,6 +12,10 @@ function App() {
         </Route>
         <Route path="/keys">
           <Keys />
+        </Route>
+
+        <Route path="/swagger">
+          <Swagger />
         </Route>
       </Switch>
     </Router>
