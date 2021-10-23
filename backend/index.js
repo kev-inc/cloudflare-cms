@@ -24,7 +24,7 @@ router.get('/', () => {
 router.get('/namespaces/:accountId', async request => {
     const accountId = request.params.accountId
     const apiKey = request.query.apiKey
-    
+
     const resp = await fetch(BASE_URL + accountId + '/storage/kv/namespaces', {
         headers: {
             Authorization: apiKey,
@@ -33,10 +33,27 @@ router.get('/namespaces/:accountId', async request => {
     return new Response(JSON.stringify(resp, null, 2), { headers })
 })
 
-router.post('/namespaces/:account_id', request => {
+/*
+{
+    "data": {
+        "title": "My Namespace"
+    },
+    "apiKey": "Bearer xxx"
+}
+*/
+router.post('/namespaces/:accountId', async request => {
     const accountId = request.params.accountId
-    const apiKey = request.query.apiKey
-    const resp = await fetch(BASE_URL)
+    const { data, apiKey } = await request.json()
+
+    const resp = await fetch(BASE_URL + accountId + '/storage/kv/namespaces', {
+        method: 'POST',
+        headers: {
+            Authorization: apiKey,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(resp => resp.json())
+    return new Response(JSON.stringify(resp, null, 2))
 })
 
 /*
@@ -70,12 +87,6 @@ router.post('/post', async request => {
     })
 })
 
-/*
-This is the last route we define, it will match anything that hasn't hit a route we've defined
-above, therefore it's useful as a 404 (and avoids us hitting worker exceptions, so make sure to include it!).
-
-Visit any page that doesn't exist (e.g. /foobar) to see it in action.
-*/
 router.all('*', () => new Response('404, not found!', { status: 404 }))
 
 addEventListener('fetch', e => {
