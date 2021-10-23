@@ -38,7 +38,7 @@ router.get('/namespaces/:accountId', async request => {
     "data": {
         "title": "My Namespace"
     },
-    "apiKey": "Bearer 5OWK63MRVbZXRNufHeaXVSav0QWCAxs45dbCtDyy"
+    "apiKey": "Bearer xxx"
 }
 */
 router.post('/namespaces/:accountId', async request => {
@@ -48,7 +48,7 @@ router.post('/namespaces/:accountId', async request => {
     const resp = await fetch(BASE_URL + accountId + '/storage/kv/namespaces', {
         method: 'POST',
         headers: {
-            'Authorization': apiKey,
+            Authorization: apiKey,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
