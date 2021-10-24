@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Cloudflare CMS is a content management system that utilises Cloudflare Products (Workers, KV, and Pages) to provide a familiar environment to use Cloudflare Products. This Swagger UI page allows you to access your Cloudflare KV and use it like any other database. 'Values' are like tables, 'Keys' are like databases with a collection of tables, and 'Namespaces' are like a collection of databases. This Swagger page can be used to access Cloudflare KV belonging to any person, as long as you have the API token with KV permissions.\n\nImportant Notes:\n* Authorize with your API token (Enter `Bearer <YOUR_API_KEY>` in the Authorize prompt)\n* `accountId` can be found on the right side of your account's workers overview page \n* `namespaceId` can be found in your account's worker KV page\n* `keyName` is the name of the key in your namespace\n* `itemId` is the ID of an object in the array of values of the key\n",
+    "description": "Cloudflare CMS is a content management system that utilises Cloudflare Products (Workers, KV, and Pages) to provide a familiar UI environment to use Cloudflare Products. This Swagger UI page allows you to access your Cloudflare KV and use it like a NoSQL database. 'Values' are JSON arrays, 'Keys' are a collection of JSON arrays, and 'Namespaces' are like a collection of 'keys'. This Swagger page can be used to access Cloudflare KV belonging to any person, as long as you have the API token with KV permissions.\n\nImportant Notes:\n* Authorize with your API token (Enter 'Bearer <YOUR_API_KEY>' in the Authorize prompt)\n* `accountId` can be found on the right side of your account's workers overview page \n* `namespaceId` can be found in your account's worker KV page\n* `keyName` is the name of the key in your namespace\n* `itemId` is the ID of an object in the array of values of the key\n",
     "version": "1.0.0",
     "title": "Cloudflare CMS API"
   },
@@ -9,13 +9,16 @@
   "basePath": "/",
   "tags": [
     {
-      "name": "namespaces"
+      "name": "namespaces",
+      "description": "Collection of keys"
     },
     {
-      "name": "keys"
+      "name": "keys",
+      "description": "Collection of values"
     },
     {
-      "name": "values"
+      "name": "values",
+      "description": "JSON Arrays"
     }
   ],
   "schemes": [
@@ -23,6 +26,11 @@
   ],
   "paths": {
     "/{accountId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        }
+      ],
       "get": {
         "tags": [
           "namespaces"
@@ -33,15 +41,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -67,13 +66,6 @@
         ],
         "parameters": [
           {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "payload",
             "description": "New namespace details",
@@ -96,6 +88,14 @@
       }
     },
     "/{accountId}/{namespaceId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/namespaceId"
+        }
+      ],
       "put": {
         "tags": [
           "namespaces"
@@ -108,20 +108,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "body",
             "name": "payload",
@@ -154,22 +140,6 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -183,6 +153,14 @@
       }
     },
     "/{accountId}/{namespaceId}/keys": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/namespaceId"
+        }
+      ],
       "get": {
         "tags": [
           "keys"
@@ -193,22 +171,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -234,20 +196,6 @@
         ],
         "parameters": [
           {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "payload",
             "description": "New key details",
@@ -270,6 +218,17 @@
       }
     },
     "/{accountId}/{namespaceId}/{keyName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/namespaceId"
+        },
+        {
+          "$ref": "#/parameters/keyName"
+        }
+      ],
       "get": {
         "tags": [
           "values"
@@ -280,29 +239,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "Name of key",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -328,27 +264,6 @@
         ],
         "parameters": [
           {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "Name of key",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "payload",
             "description": "New item details",
@@ -371,6 +286,20 @@
       }
     },
     "/{accountId}/{namespaceId}/{keyName}/{itemId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/accountId"
+        },
+        {
+          "$ref": "#/parameters/namespaceId"
+        },
+        {
+          "$ref": "#/parameters/keyName"
+        },
+        {
+          "$ref": "#/parameters/itemId"
+        }
+      ],
       "get": {
         "tags": [
           "values"
@@ -381,36 +310,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "Name of key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "itemId",
-            "in": "path",
-            "description": "ID of item",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -435,34 +334,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "Name of key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "itemId",
-            "in": "path",
-            "description": "ID of item",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "body",
             "name": "payload",
@@ -494,36 +365,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "ID of account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceId",
-            "in": "path",
-            "description": "ID of namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "Name of key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "itemId",
-            "in": "path",
-            "description": "ID of item",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -571,9 +412,47 @@
     },
     "Value": {
       "type": "object",
+      "properties": {
+        "foo": {
+          "type": "string"
+        },
+        "bar": {
+          "type": "integer"
+        }
+      },
       "xml": {
         "name": "Value"
       }
+    }
+  },
+  "parameters": {
+    "accountId": {
+      "name": "accountId",
+      "in": "path",
+      "description": "ID of account",
+      "required": true,
+      "type": "string"
+    },
+    "namespaceId": {
+      "name": "namespaceId",
+      "in": "path",
+      "description": "ID of namespace",
+      "required": true,
+      "type": "string"
+    },
+    "keyName": {
+      "name": "keyName",
+      "in": "path",
+      "description": "Name of key",
+      "required": true,
+      "type": "string"
+    },
+    "itemId": {
+      "name": "itemId",
+      "in": "path",
+      "description": "ID of item",
+      "required": true,
+      "type": "string"
     }
   }
 }
