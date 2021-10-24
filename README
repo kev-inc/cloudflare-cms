@@ -4,7 +4,10 @@ Link to Frontend: https://cloudflare-cms.pages.dev/
 
 Link to Backend: https://cloudflare-cms-api.kevc.workers.dev/
 
-Cloudflare CMS is a content management system that utilises Cloudflare Products (Workers, KV, and Pages) to provide a familiar environment to use Cloudflare Products. This Swagger UI page allows you to access your Cloudflare KV and use it like any other database. 'Values' are like tables, 'Keys' are like databases with a collection of tables, and 'Namespaces' are like a collection of databases. This Swagger page can be used to access Cloudflare KV belonging to any person, as long as you have the API token with KV permissions.
+Cloudflare CMS is a content management system that utilises Cloudflare Products (Workers, KV, and Pages) to provide a familiar UI environment to use Cloudflare Products. 
+This Swagger UI page allows you to access your Cloudflare KV and use it like a NoSQL database. 
+'Values' are JSON arrays, 'Keys' are a collection of JSON arrays, and 'Namespaces' are like a collection of 'keys'. 
+This Swagger page can be used to access Cloudflare KV belonging to any person, as long as you have the API token with KV permissions.
 
 Important Notes:
 
